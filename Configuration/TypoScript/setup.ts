@@ -20,35 +20,12 @@ plugin.tx_rkwgraphics_graphics {
   }
 }
 
+
+// include JS
+page.includeJSFooterlibs.txRkwGraphicsApexCharts  = EXT:rkw_graphics/Resources/Public/Js/ApexCharts-v3.2.2.min.js
+
+
+
 plugin.tx_rkwgraphics._CSS_DEFAULT_STYLE (
-    textarea.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
-    }
 
-    input.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
-    }
-
-    .tx-rkw-graphics table {
-        border-collapse:separate;
-        border-spacing:10px;
-    }
-
-    .tx-rkw-graphics table th {
-        font-weight:bold;
-    }
-
-    .tx-rkw-graphics table td {
-        vertical-align:top;
-    }
-
-    .typo3-messages .message-error {
-        color:red;
-    }
-
-    .typo3-messages .message-ok {
-        color:green;
-    }
 )

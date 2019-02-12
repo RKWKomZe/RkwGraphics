@@ -1,0 +1,80 @@
+
+<f:layout name="Default" />
+
+This template displays a NEW form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+Resources:
+Private:
+Templates:
+New.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+    <figure class="tx-rkw-graphics-chart">
+        <div id="txRkwGraphicsChart{contentUid}" class="tx-rkw-graphics-chart__figure"></div>
+        <f:if condition="{caption}">
+            <figcaption class="tx-rkw-graphics-chart__caption" >
+                <f:if condition="{captionLabel}"><strong>{captionLabel}:</strong>&nbsp;</f:if>{caption}
+            </figcaption>
+        </f:if>
+    </figure>
+
+
+    <!-- Build JS -->
+    <f:comment>using type-variable to prevent f***ing PHPstorm from trying to analyse the following code</f:comment>
+    <script type="{type}">
+        var txRkwGraphicsChartOptions{contentUid} = {
+            <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
+            chart: {
+                width: 600,
+                height: 500,
+                type: 'bar',
+                stacked: true,
+                stackType: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                },
+            },
+            stroke: {
+                width: 1,
+                colors: ["#fff"]
+            },
+            series: [{
+                name: 'negativ',
+                data: [8.0, 2.0, 6.0, 6.0, 0.0]
+            },
+            {
+                name: 'eher negativ',
+                data: [24.0, 32.0, 33.0, 28.0, 2.0]
+            }],
+             <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
+            colors: {colours},
+            dataLabels: {
+                enabled: false,
+            },
+            tooltip: {
+                shared: false,
+                x: {
+                    formatter: function(val) {
+                        return val
+                    }
+                },
+                y: {
+                    formatter: function(val) {
+                        return Math.abs(val) + "%"
+                    }
+                }
+            },
+            xaxis: {
+                categories: ['Einschätzung der volkswirtschaftlichen Bedeutung digitaler Plattformen', 2009, 2010, 2011, 2012, 2013, 2014],
+            },
+        };
+
+    </script>
+</f:section>

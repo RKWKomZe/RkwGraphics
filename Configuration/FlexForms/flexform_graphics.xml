@@ -14,12 +14,12 @@
 								<type>select</type>
 								<items>
 									<numIndex index="0">
-										<numIndex index="0">Pie</numIndex>
-										<numIndex index="1">Graphics->Pie</numIndex>
+										<numIndex index="0">Donut</numIndex>
+										<numIndex index="1">Graphics->donut</numIndex>
 									</numIndex>
 									<numIndex index="1">
 										<numIndex index="0">Bars</numIndex>
-										<numIndex index="1">Graphics->Bars</numIndex>
+										<numIndex index="1">Graphics->bars</numIndex>
 									</numIndex>
 								</items>
 							</config>

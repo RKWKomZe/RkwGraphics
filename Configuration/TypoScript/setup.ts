@@ -23,6 +23,7 @@ plugin.tx_rkwgraphics_graphics {
 
 // include JS
 page.includeJSFooterlibs.txRkwGraphicsApexCharts  = EXT:rkw_graphics/Resources/Public/Js/ApexCharts-v3.2.2.min.js
+page.includeCSS.txRkwGraphicsCharts  = EXT:rkw_graphics/Resources/Public/Css/Charts.css
 
 
 

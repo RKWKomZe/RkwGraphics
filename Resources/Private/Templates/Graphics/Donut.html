@@ -1,3 +1,4 @@
+{namespace rkwGraphics=RKW\RkwGraphics\ViewHelpers}
 
 <f:layout name="Default" />
 
@@ -14,15 +15,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="main">
 
-    <figure class="tx-rkw-graphics-chart">
-        <div id="txRkwGraphicsChart{contentUid}" class="tx-rkw-graphics-chart__figure"></div>
-        <f:if condition="{caption}">
-            <figcaption class="tx-rkw-graphics-chart__caption" >
-                <f:if condition="{captionLabel}"><strong>{captionLabel}:</strong>&nbsp;</f:if>{caption}
-            </figcaption>
-        </f:if>
-    </figure>
-
+    <f:render partial="Chart" arguments="{_all}" />
 
     <!-- Build JS -->
     <f:comment>using type-variable to prevent f***ing PHPstorm from trying to analyse the following code</f:comment>
@@ -41,13 +34,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     }
                 }
             },
-            labels: {labels},
-            series: {data},
+            labels: <rkwGraphics:jsArray data="{labels}" />,
+            series: <rkwGraphics:jsArray data="{series}" checkFloat="true" />,
             fill: {
                 <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
-                colors: {colours},
+                colors: <rkwGraphics:jsArray data="{colours}" />,
             },
-            colors: {colours},
+            colors: <rkwGraphics:jsArray data="{colours}" />,
             dataLabels: {
                 enabled: true,
                 style: {
@@ -70,34 +63,70 @@ Otherwise your changes will be overwritten the next time you save the extension 
             tooltip: {
                 enabled: false,
             },
-            responsive: [{
-                breakpoint: 600,
-                options: {
-                    chart: {
-                        width: 300,
-                        height: 300,
-                    },
-                    plotOptions: {
-                        pie: {
-                            donut: {
-                                size: '50%'
-                            }
-                        }
-                    },
-                    legend: {
-                        position: 'bottom',
-                        fontSize: '14px',
-                    },
-                    dataLabels: {
-                        style: {
+            responsive: [
+
+                {
+                    breakpoint: 1280,
+                    options: {
+                        chart: {
+                            width: 500,
+                            height: 500,
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    }
+                },
+                {
+                    breakpoint: 1025,
+                    options: {
+                        chart: {
+                            width: 600,
+                            height: 500,
+                        },
+                        legend: {
+                            position: 'right',
                             fontSize: '14px',
                         },
-                        dropShadow: {
-                            enabled: false,
+                        dataLabels: {
+                            style: {
+                                fontSize: '14px',
+                            },
+                            dropShadow: {
+                                enabled: false,
+                            },
                         },
-                    },
+                    }
+                },
+                {
+                    breakpoint: 660,
+                    options: {
+                        chart: {
+                            width: 500,
+                            height: 500,
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    }
+                },
+                {
+                    breakpoint: 540,
+                    options: {
+                        chart: {
+                            width: 310,
+                            height: 310,
+                        },
+                        plotOptions: {
+                            pie: {
+                                donut: {
+                                    size: '50%'
+                                }
+                            }
+                        },
+                    }
                 }
-            }]
+            ]
         };
 
     </script>

@@ -1,3 +1,4 @@
+{namespace rkwGraphics=RKW\RkwGraphics\ViewHelpers}
 
 <f:layout name="Default" />
 
@@ -14,14 +15,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="main">
 
-    <figure class="tx-rkw-graphics-chart">
-        <div id="txRkwGraphicsChart{contentUid}" class="tx-rkw-graphics-chart__figure"></div>
-        <f:if condition="{caption}">
-            <figcaption class="tx-rkw-graphics-chart__caption" >
-                <f:if condition="{captionLabel}"><strong>{captionLabel}:</strong>&nbsp;</f:if>{caption}
-            </figcaption>
-        </f:if>
-    </figure>
+    <f:render partial="Chart" arguments="{_all}" />
 
 
     <!-- Build JS -->
@@ -30,50 +24,137 @@ Otherwise your changes will be overwritten the next time you save the extension 
         var txRkwGraphicsChartOptions{contentUid} = {
             <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
             chart: {
-                width: 600,
-                height: 500,
+                width: 900,
+                height: 600,
                 type: 'bar',
                 stacked: true,
                 stackType: '100%'
             },
             plotOptions: {
                 bar: {
-                    horizontal: true,
+                    horizontal: false,
                 },
             },
             stroke: {
                 width: 1,
-                colors: ["#fff"]
+                colors: ["#fff"],
             },
-            series: [{
-                name: 'negativ',
-                data: [8.0, 2.0, 6.0, 6.0, 0.0]
-            },
-            {
-                name: 'eher negativ',
-                data: [24.0, 32.0, 33.0, 28.0, 2.0]
-            }],
-             <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
-            colors: {colours},
+            series: <rkwGraphics:bars.series data="{series}" />,
+            colors: <rkwGraphics:jsArray data="{colours}" />,
             dataLabels: {
-                enabled: false,
+                enabled: true,
+                style: {
+                    fontSize: '16px',
+                    fontFamily: 'ff-tisa-sans-web-pro, Arial, Tahoma, Verdana, sans-serif',
+                },
+                dropShadow: {
+                    enabled: true,
+                    top: 1,
+                    left: 2,
+                    blur: 3,
+                    opacity: 0.45
+                },
+            },
+            legend: {
+                show: true,
+                fontFamily: 'ff-tisa-web-pro, Times New Roman, Times, serif',
+                position: 'top',
             },
             tooltip: {
                 shared: false,
                 x: {
                     formatter: function(val) {
+                        var strArray = val.toString().split('#');
+                        if (typeof strArray[1] !== 'undefined') {
+                            return strArray[1]
+                        }
                         return val
                     }
                 },
                 y: {
                     formatter: function(val) {
-                        return Math.abs(val) + "%"
+                        return Math.abs(val) + '%'
                     }
-                }
+                },
+                style: {
+                    fontFamily: 'ff-tisa-sans-web-pro, Arial, Tahoma, Verdana, sans-serif',
+                },
             },
             xaxis: {
-                categories: ['Einschätzung der volkswirtschaftlichen Bedeutung digitaler Plattformen', 2009, 2010, 2011, 2012, 2013, 2014],
+                <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
+                categories: <rkwGraphics:jsArray data="{labels}" />,
+                labels: {
+                    trim : false,
+                    rotate: -45,
+                    <f:comment>This comment is here to prevent fluid's parser from detecting the content of brackets</f:comment>
+                    minHeight: <rkwGraphics:bars.xAxisLabelHeight data="{labels}" />,
+                    rotateAlways: true,
+                    formatter: function(val) {
+                        var strArray = val.toString().split('#');
+                        if (typeof strArray[0] !== 'undefined') {
+                            return strArray[0]
+                        }
+                        return val
+                    },
+                    style: {
+                        fontFamily: 'ff-tisa-sans-web-pro, Arial, Tahoma, Verdana, sans-serif',
+                    },
+                 },
+
             },
+            yaxis: {
+                forceNiceScale : true,
+                labels: {
+                    trim : false,
+                    formatter: function(val) {
+                        return Math.abs(Math.round(val)) + '%'
+                    },
+
+                    style: {
+                        fontFamily: 'ff-tisa-sans-web-pro, Arial, Tahoma, Verdana, sans-serif',
+                    },
+                },
+            },
+            responsive: [
+                {
+                    breakpoint: 1488,
+                    options: {
+                        chart: {
+                            width: 750,
+                        },
+                    }
+                },
+                {
+                    breakpoint: 1280,
+                    options: {
+                        chart: {
+                            width: 500,
+                        },
+                    }
+                },
+                {
+                    breakpoint: 1025,
+                    options: {
+                        chart: {
+                            width: 600,
+                        },
+                    }
+                },
+                {
+                    breakpoint: 650,
+                    options: {
+                        chart: {
+                            width: 310,
+                        },
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                            },
+                        },
+                    }
+                },
+            ]
+
         };
 
     </script>

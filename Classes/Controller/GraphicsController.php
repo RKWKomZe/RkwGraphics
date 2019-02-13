@@ -35,6 +35,9 @@ class GraphicsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $data = GeneralUtility::trimExplode(',', addslashes('65,8,27'), true);
         $contentUid = intval($this->configurationManager->getContentObject()->data['uid']);
 
+        $colours = '#74b929|#006349|#333333';
+        $labels = 'ja| teil\'s teils| nein';
+        $series = '65|8|27';
 
         // Add rendering call to footer after lib
         $GLOBALS['TSFE']->additionalFooterData['txRkwGraphicsElement' . $contentUid] = '
@@ -52,9 +55,9 @@ class GraphicsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             array(
                 'contentUid' => $contentUid,
                 'title' => 'test Graph',
-                'colours' => "['" . implode("','", $colours) . "']",
-                'labels' => "['" . implode("','", $labels) . "']",
-                'data' => "[" . implode(",", $data) . "]",
+                'colours' => $colours,
+                'labels' => $labels,
+                'series' => $series,
                 'captionLabel' => 'Abbildung 1',
                 'caption' => 'TESt beschreeibung am Fußende!',
                 'type' => 'text/javascript'
@@ -74,9 +77,21 @@ class GraphicsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     {
 
         $colours = GeneralUtility::trimExplode(',', addslashes('#74b929, #006349, #333333'), true);
-        $labels = GeneralUtility::trimExplode(',', addslashes("ja, teil's teils, nein"), true);
-        $data = GeneralUtility::trimExplode(',', addslashes('65,8,27'), true);
+
+
+$colours = '#74b929|#006349|#333333';
+$labels = "Bedeutung#Einschätzung der volkswirtschaftlichen Bedeutung digitaler's Plattformen|Nutzungshäufigkeit#Nutzungshäufigkeit digitaler Plattformen durch Unternehmen und Organisationen|Absicherung#Gefährdung der sozialen Absicherung von Arbeitnehmern und Rentnern durch digitale Plattformen|Förderung#Förderung digitaler Plattformen durch die nationale Politik|Nutzung#Zukünftige Nutzung digitaler Plattformen durch Gründer";
+
+
+
         $contentUid = intval($this->configurationManager->getContentObject()->data['uid']);
+
+
+        $series = "
+negativ|8.0|2.0|6.0|6.0|0.0
+eher negativ|24.0|32.0|33.0|28.0|2.0
+eher negativ|
+";
 
 
         // Add rendering call to footer after lib
@@ -95,9 +110,10 @@ class GraphicsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             array(
                 'contentUid' => $contentUid,
                 'title' => 'test Graph',
-                'colours' => "['" . implode("','", $colours) . "']",
-                'labels' => "['" . implode("','", $labels) . "']",
-                'data' => "[" . implode(",", $data) . "]",
+                'colours' => $colours,
+                'labels' => $labels,
+
+                'series' => $series,
                 'captionLabel' => 'Abbildung 1',
                 'caption' => 'TESt beschreeibung am Fußende!',
                 'type' => 'text/javascript'

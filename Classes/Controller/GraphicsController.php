@@ -76,10 +76,10 @@ class GraphicsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     public function barsAction()
     {
 
-        $colours = GeneralUtility::trimExplode(',', addslashes('#74b929, #006349, #333333'), true);
+        $colours = GeneralUtility::trimExplode(',', addslashes(', #006349, #333333'), true);
 
 
-$colours = '#74b929|#006349|#333333';
+$colours = '#ff0000|#e64415|#333333|#006349|#74b929';
 $labels = "Bedeutung#Einschätzung der volkswirtschaftlichen Bedeutung digitaler's Plattformen|Nutzungshäufigkeit#Nutzungshäufigkeit digitaler Plattformen durch Unternehmen und Organisationen|Absicherung#Gefährdung der sozialen Absicherung von Arbeitnehmern und Rentnern durch digitale Plattformen|Förderung#Förderung digitaler Plattformen durch die nationale Politik|Nutzung#Zukünftige Nutzung digitaler Plattformen durch Gründer";
 
 
@@ -90,7 +90,9 @@ $labels = "Bedeutung#Einschätzung der volkswirtschaftlichen Bedeutung digitaler
         $series = "
 negativ|8.0|2.0|6.0|6.0|0.0
 eher negativ|24.0|32.0|33.0|28.0|2.0
-eher negativ|
+teils-teils|10.|13.0|15.0|19.0|2.0
+eher positiv|46.0|40.0|37.0|44.0|37.0
+positiv|12.0|13.0|9.0|3.0|59.0
 ";
 
 
@@ -116,7 +118,11 @@ eher negativ|
                 'series' => $series,
                 'captionLabel' => 'Abbildung 1',
                 'caption' => 'TESt beschreeibung am Fußende!',
-                'type' => 'text/javascript'
+                'type' => 'text/javascript',
+                'stacked' => false,
+                'stackedPercent' => true,
+                'percentage' => true,
+
 
             )
         );

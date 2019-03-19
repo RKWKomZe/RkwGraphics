@@ -28,7 +28,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 height: 600,
                 type: 'bar',
                 stacked: true,
-                stackType: '100%'
+               //  stackType: '100%',
             },
             plotOptions: {
                 bar: {
@@ -42,7 +42,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
             series: <rkwGraphics:bars.series data="{series}" />,
             colors: <rkwGraphics:jsArray data="{colours}" />,
             dataLabels: {
-                enabled: true,
+                enabled:true,
                 style: {
                     fontSize: '16px',
                     fontFamily: 'ff-tisa-sans-web-pro, Arial, Tahoma, Verdana, sans-serif',
@@ -53,6 +53,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     left: 2,
                     blur: 3,
                     opacity: 0.45
+                },
+                formatter: function(val) {
+                    return Math.abs(val) + '%'
                 },
             },
             legend: {
